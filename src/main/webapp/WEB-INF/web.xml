@@ -9,7 +9,7 @@
 		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
 		<init-param>
 			<param-name>com.sun.jersey.config.property.packages</param-name>
-			<param-value>it.micheleorsi.endpoints;org.codehaus.jackson.jaxrs</param-value>
+			<param-value>it.micheleorsi.endpoints;com.fasterxml.jackson.jaxrs.json</param-value>
 		</init-param>
 		<!-- in order to remove prefix in lists -->
 		<init-param>

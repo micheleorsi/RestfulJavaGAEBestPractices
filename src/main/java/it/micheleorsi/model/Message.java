@@ -15,6 +15,8 @@ public class Message {
 	private String subject = null;
 	private String body = null;
 	
+	public Message() {}
+	
 	public Message(String subject, String body) {
 		this.subject = subject;
 		this.body = body;

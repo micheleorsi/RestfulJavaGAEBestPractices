@@ -15,14 +15,6 @@
         <maven>3.1</maven>
     </prerequisites>
     
-    <pluginRepositories>
-        <pluginRepository>
-            <id>google-staging</id>
-            <name>Google Staging</name>
-            <url>https://oss.sonatype.org/content/repositories/comgoogleappengine-1004/</url>
-        </pluginRepository>
-    </pluginRepositories>
-
     <properties>
     	<appengine.app.name>micheletests</appengine.app.name>
         <appengine.app.version>bestpractices</appengine.app.version>
@@ -30,6 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jersey.version>1.17</jersey.version>
         <jackson.version>2.3.0</jackson.version>
+        <juel.version>2.2.7-SNAPSHOT</juel.version>
     </properties>
 
     <dependencies>
@@ -74,7 +67,7 @@
 <!-- 		<dependency> -->
 <!-- 		  <groupId>com.sun.jersey</groupId> -->
 <!-- 		  <artifactId>jersey-server-linking</artifactId> -->
-<!-- 		  <version>${jersey-version}</version> -->
+<!-- 		  <version>${jersey.version}</version> -->
 <!-- 		</dependency> -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -86,7 +79,6 @@
 			<artifactId>jackson-jaxrs-json-provider</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-            
 
         <!-- Test Dependencies -->
         <dependency>
@@ -101,6 +93,7 @@
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
+        
         <!-- Google tools -->
         <dependency>
             <groupId>com.google.appengine</groupId>
@@ -114,6 +107,28 @@
             <version>${appengine.target.version}</version>
             <scope>test</scope>
         </dependency>
+        
+        <!-- JUEL -->
+<!--         <dependency> -->
+<!-- 		    <groupId>de.odysseus.juel</groupId> -->
+<!-- 		    <artifactId>juel-api</artifactId> -->
+<!-- 		    <version>${juel.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>de.odysseus.juel</groupId> -->
+<!-- 		    <artifactId>juel-impl</artifactId> -->
+<!-- 		    <version>${juel.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>de.odysseus.juel</groupId> -->
+<!-- 		    <artifactId>juel-spi</artifactId> -->
+<!-- 		    <version>${juel.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.glassfish.web</groupId> -->
+<!-- 			<artifactId>el-impl</artifactId> -->
+<!-- 			<version>2.2</version> -->
+<!-- 		</dependency> -->
     </dependencies>
 
     <build>
@@ -153,4 +168,19 @@
             </plugin>
         </plugins>
     </build>
+    
+    <pluginRepositories>
+        <pluginRepository>
+            <id>google-staging</id>
+            <name>Google Staging</name>
+            <url>https://oss.sonatype.org/content/repositories/comgoogleappengine-1004/</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <repositories>
+	    <repository>
+		    <id>repo-id</id>
+		    <name>repo-name</name>
+		    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</repository>
+    </repositories>
 </project>

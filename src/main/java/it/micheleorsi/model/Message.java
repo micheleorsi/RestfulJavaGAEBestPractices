@@ -11,8 +11,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class Message {
-//	@Ref(resource=MessageResource.class)
-//	URI u;
 	
 	private String subject = null;
 	private String body = null;

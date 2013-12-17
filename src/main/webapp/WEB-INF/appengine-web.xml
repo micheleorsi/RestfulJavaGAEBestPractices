@@ -3,7 +3,11 @@
     <application>${appengine.app.name}</application>
     <version>${appengine.app.version}</version>
     <threadsafe>true</threadsafe>
-
+    <sessions-enabled>false</sessions-enabled>
+	<ssl-enabled>true</ssl-enabled>
+	<warmup-requests-enabled>true</warmup-requests-enabled>
+	<precompilation-enabled>true</precompilation-enabled>
+	
     <system-properties>
         <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
     </system-properties>

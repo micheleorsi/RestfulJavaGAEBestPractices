@@ -21,7 +21,9 @@ public class MySecurityContext implements javax.ws.rs.core.SecurityContext {
     private final String authSchema;
  
     public MySecurityContext(Boolean secure, String authSchema, User user) {
-        this.secure = secure;
+    	log.info("init");
+    	
+    	this.secure = secure;
         this.user = user;
         this.authSchema = authSchema;
     }

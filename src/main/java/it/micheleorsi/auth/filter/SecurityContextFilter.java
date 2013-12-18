@@ -29,6 +29,10 @@ public class SecurityContextFilter implements ResourceFilter, ContainerRequestFi
 	
 	Logger log = Logger.getLogger(SecurityContextFilter.class.getName());
 	
+	public SecurityContextFilter() {
+		log.info("init");
+	}
+	
 	@Override
     public ContainerRequest filter(ContainerRequest request) {
 		log.info("start ContainerRequest");

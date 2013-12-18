@@ -3,8 +3,12 @@
  */
 package it.micheleorsi.endpoints;
 
+import it.micheleorsi.auth.model.User;
 import it.micheleorsi.model.Message;
 
+import javax.annotation.security.DenyAll;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -23,12 +27,14 @@ public class MessageResource {
 	
 	@GET
 	@Path("{id}")
+	@PermitAll
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Message getResource(@PathParam("id") String id) {
 		return new Message("text subject","text body",id);
 	}
 	
 	@POST
+	@RolesAllowed({"CONTRIBUTOR"})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Message createResource(Message message) {
 		return message;
@@ -36,6 +42,7 @@ public class MessageResource {
 	
 	@PUT
 	@Path("{id}")
+	@RolesAllowed({"EDITOR"})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Message updateResource(Message message) {
 		return message;
@@ -43,6 +50,7 @@ public class MessageResource {
 	
 	@DELETE
 	@Path("{id}")
+	@DenyAll
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public void deleteResource(@PathParam("id") String id) {}
 

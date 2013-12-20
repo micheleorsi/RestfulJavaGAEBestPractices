@@ -1,9 +1,9 @@
 /**
  * 
  */
-package it.micheleorsi.endpoints;
+package it.micheleorsi.endpoints.intefaces;
 
-import it.micheleorsi.auth.model.User;
+import it.micheleorsi.auth.model.User.Role;
 import it.micheleorsi.model.Message;
 
 import javax.annotation.security.DenyAll;
@@ -22,36 +22,29 @@ import javax.ws.rs.core.MediaType;
  * @author micheleorsi
  *
  */
-@Path("messages")
-public class MessageResource {
+public interface MessageResource {
 	
 	@GET
 	@Path("{id}")
 	@PermitAll
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Message getResource(@PathParam("id") String id) {
-		return new Message("text subject","text body",id);
-	}
+	public Message getResource(@PathParam("id") String id);
 	
 	@POST
-	@RolesAllowed({"CONTRIBUTOR"})
+	@RolesAllowed({Role.Values.CONTRIBUTOR})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Message createResource(Message message) {
-		return message;
-	}
+	public Message createResource(Message message);
 	
 	@PUT
 	@Path("{id}")
-	@RolesAllowed({"EDITOR"})
+	@RolesAllowed({Role.Values.EDITOR})
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Message updateResource(Message message) {
-		return message;
-	}
+	public Message updateResource(Message message);
 	
 	@DELETE
 	@Path("{id}")
 	@DenyAll
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public void deleteResource(@PathParam("id") String id) {}
+	public void deleteResource(@PathParam("id") String id);
 
 }

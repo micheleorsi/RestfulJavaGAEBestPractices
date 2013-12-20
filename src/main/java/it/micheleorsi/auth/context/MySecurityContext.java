@@ -6,6 +6,9 @@ package it.micheleorsi.auth.context;
 import java.security.Principal;
 import java.util.logging.Logger;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response.Status;
+
 import it.micheleorsi.auth.model.User;
 
 /**
@@ -44,15 +47,21 @@ public class MySecurityContext implements javax.ws.rs.core.SecurityContext {
     }
  
     @Override
-    public boolean isUserInRole(String role) {
-    	log.info("check user log");
+    public boolean isUserInRole(String role) {    	
+    	log.info("check role");
+    	
+    	if(this.authSchema == null || this.user == null){
+        	log.info("auth is null");
+            throw new WebApplicationException(Status.UNAUTHORIZED);
+        } 
+    	
     	boolean returnValue = false;
  
         try {
             // this user has this role?
         	returnValue = user.getRoles().contains(User.Role.valueOf(role));
         } catch (Exception e) {
-        	
+        	log.warning(e.getMessage());
         }
         log.info("return "+returnValue);
         return returnValue;

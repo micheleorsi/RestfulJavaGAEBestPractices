@@ -22,29 +22,30 @@ import javax.ws.rs.core.MediaType;
  * @author micheleorsi
  *
  */
+@Path("messages")
 public interface MessageResource {
 	
 	@GET
 	@Path("{id}")
 	@PermitAll
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Message getResource(@PathParam("id") String id);
 	
 	@POST
 	@RolesAllowed({Role.Values.CONTRIBUTOR})
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Message createResource(Message message);
 	
 	@PUT
 	@Path("{id}")
 	@RolesAllowed({Role.Values.EDITOR})
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Message updateResource(Message message);
 	
 	@DELETE
 	@Path("{id}")
 	@DenyAll
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public void deleteResource(@PathParam("id") String id);
 
 }

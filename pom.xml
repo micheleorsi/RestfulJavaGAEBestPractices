@@ -20,7 +20,7 @@
         <appengine.app.version>restfulbestpractices</appengine.app.version>
         <appengine.target.version>1.8.7</appengine.target.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jersey.version>1.17</jersey.version>
+        <jersey.version>1.18</jersey.version>
         <jackson.version>2.3.0</jackson.version>
 <!--         <juel.version>2.2.7-SNAPSHOT</juel.version> -->
     </properties>
@@ -64,11 +64,6 @@
 		    <artifactId>jersey-servlet</artifactId>
 		    <version>${jersey.version}</version>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 		  <groupId>com.sun.jersey</groupId> -->
-<!-- 		  <artifactId>jersey-server-linking</artifactId> -->
-<!-- 		  <version>${jersey.version}</version> -->
-<!-- 		</dependency> -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
@@ -78,6 +73,22 @@
 			<groupId>com.fasterxml.jackson.jaxrs</groupId>
 			<artifactId>jackson-jaxrs-json-provider</artifactId>
 			<version>${jackson.version}</version>
+		</dependency>
+		<!-- Dependency Injection -->
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+        <dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-guice</artifactId>
+			<version>${jersey.version}</version>
 		</dependency>
 
         <!-- Test Dependencies -->
@@ -93,6 +104,19 @@
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>${jersey.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		 <dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-grizzly2</artifactId>
+			<version>${jersey.version}</version>
+			<scope>test</scope>
+		</dependency>
         
         <!-- Google tools -->
         <dependency>
@@ -115,27 +139,7 @@
 		    <version>1.0</version>
 		</dependency>
         
-        <!-- JUEL -->
-<!--         <dependency> -->
-<!-- 		    <groupId>de.odysseus.juel</groupId> -->
-<!-- 		    <artifactId>juel-api</artifactId> -->
-<!-- 		    <version>${juel.version}</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 		    <groupId>de.odysseus.juel</groupId> -->
-<!-- 		    <artifactId>juel-impl</artifactId> -->
-<!-- 		    <version>${juel.version}</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 		    <groupId>de.odysseus.juel</groupId> -->
-<!-- 		    <artifactId>juel-spi</artifactId> -->
-<!-- 		    <version>${juel.version}</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.glassfish.web</groupId> -->
-<!-- 			<artifactId>el-impl</artifactId> -->
-<!-- 			<version>2.2</version> -->
-<!-- 		</dependency> -->
+       
     </dependencies>
 
     <build>

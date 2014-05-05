@@ -16,7 +16,7 @@
     </prerequisites>
     
     <properties>
-    	<appengine.app.name>micheletests</appengine.app.name>
+    	<appengine.app.name>map2app-platform</appengine.app.name>
         <appengine.app.version>version1</appengine.app.version>
         <appengine.target.version>1.9.4</appengine.target.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

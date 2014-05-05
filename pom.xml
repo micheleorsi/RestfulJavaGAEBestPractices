@@ -16,8 +16,8 @@
     </prerequisites>
     
     <properties>
-    	<appengine.app.name>micheletests</appengine.app.name>
-        <appengine.app.version>restfulbestpractices</appengine.app.version>
+    	<appengine.app.name>cloudacademy-test1</appengine.app.name>
+        <appengine.app.version>version1</appengine.app.version>
         <appengine.target.version>1.9.4</appengine.target.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jersey.version>1.18.1</jersey.version>

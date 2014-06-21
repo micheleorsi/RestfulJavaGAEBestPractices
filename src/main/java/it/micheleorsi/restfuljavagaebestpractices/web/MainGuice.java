@@ -1,6 +1,6 @@
 package it.micheleorsi.restfuljavagaebestpractices.web;
 
-import it.micheleorsi.restfuljavagaebestpractices.auth.filter.ResourceFilterFactory;
+import it.micheleorsi.restfuljavagaebestpractices.auth.filters.ResourceFilterFactory;
 import it.micheleorsi.restfuljavagaebestpractices.endpoints.MessageResource;
 import it.micheleorsi.restfuljavagaebestpractices.endpoints.impl.MessageResourceImpl;
 import it.micheleorsi.restfuljavagaebestpractices.utils.Constants;

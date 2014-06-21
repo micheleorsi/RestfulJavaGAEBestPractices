@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.micheleorsi.restfuljavagaebestpractices.auth.filter;
+package it.micheleorsi.restfuljavagaebestpractices.auth.filters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class ResourceFilterFactory extends RolesAllowedResourceFilterFactory {
 		List<ResourceFilter> filters = new ArrayList<ResourceFilter>(rolesFilters);
 
 		// Load SecurityContext first (this will load security context onto request)
-		filters.add(0, new SecurityContextFilter());
+		filters.add(0, new Authentication());
 
 		// Version Control?
 //		filters.add(versionFilter);

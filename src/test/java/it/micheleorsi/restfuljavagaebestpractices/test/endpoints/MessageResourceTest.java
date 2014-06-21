@@ -8,12 +8,9 @@ import static org.junit.Assert.*;
 import javax.ws.rs.core.MediaType;
 
 import it.micheleorsi.restfuljavagaebestpractices.model.Message;
-import it.micheleorsi.restfuljavagaebestpractices.web.MainGuice;
-
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
+import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 
 /**
@@ -27,7 +24,7 @@ public class MessageResourceTest extends EndpointTest {
 	}
 
 	/**
-	 * Test method for {@link it.micheleorsi.endpoints.intefaces.MessageResource#getResource(java.lang.String)}.
+	 * Test method for {@link it.micheleorsi.restfuljavagaebestpractices.endpoints.MessageResource#getResource(java.lang.String)}.
 	 */
 	@Test
 	public void testGetResource() {
@@ -42,5 +39,35 @@ public class MessageResourceTest extends EndpointTest {
         		.accept(MediaType.APPLICATION_JSON)
         		.get(Message.class);
         assertEquals(Integer.valueOf("12"),responseMsg.getId());
+	}
+	
+	/**
+	 * Test method for {@link it.micheleorsi.restfuljavagaebestpractices.endpoints.MessageResource#createResource(it.micheleorsi.restfuljavagaebestpractices.model.Message)}.
+	 */
+	@Test
+	public void testCreateResource() {
+		WebResource webResource = resource();
+		try {
+			Message responseMsg = webResource
+	        		.path("messages")
+	        		.entity(new Message("subj", "body", Integer.valueOf(10)))
+	        		.post(Message.class);
+		} catch(UniformInterfaceException e) {
+			assertTrue(true);
+		}
+	}
+
+	/**
+	 * Test method for {@link it.micheleorsi.restfuljavagaebestpractices.endpoints.MessageResource#updateResource(it.micheleorsi.restfuljavagaebestpractices.model.Message)}.
+	 */
+	@Test
+	public void testUpdateResource() {
+	}
+
+	/**
+	 * Test method for {@link it.micheleorsi.restfuljavagaebestpractices.endpoints.MessageResource#deleteResource(java.lang.String)}.
+	 */
+	@Test
+	public void testDeleteResource() {
 	}
 }

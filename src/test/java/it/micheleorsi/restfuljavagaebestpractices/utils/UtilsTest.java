@@ -4,7 +4,7 @@
 package it.micheleorsi.restfuljavagaebestpractices.utils;
 
 import static org.junit.Assert.*;
-import it.micheleorsi.restfuljavagaebestpractices.auth.filter.ResourceFilterFactory;
+import it.micheleorsi.restfuljavagaebestpractices.auth.filters.ResourceFilterFactory;
 
 import org.junit.After;
 import org.junit.AfterClass;

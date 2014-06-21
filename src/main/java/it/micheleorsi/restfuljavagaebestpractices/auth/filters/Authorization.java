@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.micheleorsi.restfuljavagaebestpractices.auth.context;
+package it.micheleorsi.restfuljavagaebestpractices.auth.filters;
 
 import java.security.Principal;
 import java.util.logging.Logger;
@@ -15,15 +15,15 @@ import it.micheleorsi.restfuljavagaebestpractices.auth.model.User;
  * @author micheleorsi
  *
  */
-public class MySecurityContext implements javax.ws.rs.core.SecurityContext {
+public class Authorization implements javax.ws.rs.core.SecurityContext {
 	
-	private final Logger log = Logger.getLogger(MySecurityContext.class.getName());
+	private final Logger log = Logger.getLogger(Authorization.class.getName());
 	 
     private final User user;
     private final Boolean secure;
     private final String authSchema;
  
-    public MySecurityContext(Boolean secure, String authSchema, User user) {
+    public Authorization(Boolean secure, String authSchema, User user) {
     	log.info("init");
     	
     	this.secure = secure;

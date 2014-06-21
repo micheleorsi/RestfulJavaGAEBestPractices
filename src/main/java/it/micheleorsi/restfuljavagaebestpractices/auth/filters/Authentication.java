@@ -1,13 +1,12 @@
 /**
  * 
  */
-package it.micheleorsi.restfuljavagaebestpractices.auth.filter;
+package it.micheleorsi.restfuljavagaebestpractices.auth.filters;
 
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import it.micheleorsi.restfuljavagaebestpractices.auth.context.MySecurityContext;
-import it.micheleorsi.restfuljavagaebestpractices.auth.filter.enums.AuthType;
+import it.micheleorsi.restfuljavagaebestpractices.auth.filters.enums.AuthType;
 import it.micheleorsi.restfuljavagaebestpractices.auth.model.Session;
 import it.micheleorsi.restfuljavagaebestpractices.auth.model.User;
 
@@ -28,11 +27,11 @@ import com.sun.jersey.spi.resource.Singleton;
  *
  */
 @Provider // register as jersey's provider
-public class SecurityContextFilter implements ResourceFilter, ContainerRequestFilter {
+public class Authentication implements ResourceFilter, ContainerRequestFilter {
 	
-	Logger log = Logger.getLogger(SecurityContextFilter.class.getName());
+	Logger log = Logger.getLogger(Authentication.class.getName());
 	
-	public SecurityContextFilter() {
+	public Authentication() {
 		log.info("init");
 	}
 	
@@ -133,7 +132,7 @@ public class SecurityContextFilter implements ResourceFilter, ContainerRequestFi
 //        }
  
      // Set security context
-        request.setSecurityContext(new MySecurityContext(request.isSecure(), authSchema, user));
+        request.setSecurityContext(new Authorization(request.isSecure(), authSchema, user));
         
         log.info("ready to return");
         return request;

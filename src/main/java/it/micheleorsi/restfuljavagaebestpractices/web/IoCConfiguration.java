@@ -29,7 +29,6 @@ public class IoCConfiguration extends GuiceServletContextListener {
 
     Logger logger = Logger.getLogger(this.getClass().getName());
 
-    // (1) Override getInjector
     @Override
     protected Injector getInjector() {
     	
@@ -41,26 +40,21 @@ public class IoCConfiguration extends GuiceServletContextListener {
     	@Override
         protected void configureServlets() {
     		Map<String, String> params = new HashMap<String, String>();
-    		/*
-             * The following line will use MainJerseyApplication.java to define Jersey resources
-             */
-            params.put(Application.class.getName(), MainJerseyApplication.class.getName());
+//            params.put(Application.class.getName(), MainJerseyApplication.class.getName());
             params.put("com.sun.jersey.api.json.POJOMappingFeature", "true");
             params.put("com.sun.jersey.config.feature.DisableWADL", "true");
             params.put(ResourceFilters.class.getName(), ResourceFilterFactory.class.getName());
             
-//            bind(SecurityFilter.class).in(Singleton.class);
-//        	bind(MainJerseyApplication.class).in(Singleton.class);
-            bind(MessageResource.class).to(MessageResourceImpl.class);// .in(Singleton.class);
-//            bind(ServletContainer.class).in(Singleton.class);
+            // REST resources
+            bind(MessageResource.class).to(MessageResourceImpl.class);
+            
+            // persistence layer 
             bind(UserDAO.class).to(CloudDatastoreUserDAO.class);
+            
+            // auth layer
             bind(Authentication.class).to(AuthenticationImpl.class);
 
-            // (2) Change to using the GuiceContainer
-            serve(Constants.ROOT_PATH+"/*").with(GuiceContainer.class,params); // <<<<---
-
-//            bind(UserDao.class).to(UserJdbc.class);
-//            bind(SessionUtility.class);
+            serve(Constants.ROOT_PATH+"/*").with(GuiceContainer.class,params); 
         }
     }
 

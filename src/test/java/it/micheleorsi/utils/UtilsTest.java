@@ -4,6 +4,7 @@
 package it.micheleorsi.utils;
 
 import static org.junit.Assert.*;
+import it.micheleorsi.auth.filter.ResourceFilterFactory;
 
 import org.junit.After;
 import org.junit.AfterClass;

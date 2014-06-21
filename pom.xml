@@ -17,7 +17,7 @@
     
     <properties>
     	<appengine.app.name>micheletests</appengine.app.name>
-        <appengine.app.version>version1</appengine.app.version>
+        <appengine.app.version>${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}-${parsedVersion.buildNumber}</appengine.app.version>
         <appengine.target.version>1.9.6</appengine.target.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jersey.version>1.18.1</jersey.version>
@@ -62,6 +62,12 @@
 		    <groupId>com.sun.jersey</groupId>
 		    <artifactId>jersey-servlet</artifactId>
 		    <version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey.jersey-test-framework</groupId>
+			<artifactId>jersey-test-framework-grizzly2</artifactId>
+			<version>${jersey.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -178,13 +184,40 @@
                 <executions>
 					<execution>
 						<id>execution1</id>
-						<phase>post-integration-test</phase>
+						<phase>deploy</phase>
 						<goals>
 							<goal>update</goal>
+							<goal>update_dos</goal>
+							<goal>update_cron</goal>
+							<goal>update_indexes</goal>
+							<goal>update_queues</goal>
+<!-- 							<goal>vacuum_indexes</goal> -->
 						</goals>
 					</execution>
 				</executions>
             </plugin>
+            <!-- never upload war file to the repository -->
+			<plugin>
+	        	<artifactId>maven-deploy-plugin</artifactId>
+	        	<version>2.8.1</version>
+	        	<configuration>
+	        		<skip>true</skip>
+	        	</configuration>
+	        </plugin>
+            <!-- pasre maven properties -->
+            <plugin>
+			    <groupId>org.codehaus.mojo</groupId>
+			    <artifactId>build-helper-maven-plugin</artifactId>
+			    <version>1.8</version>
+			    <executions>
+					<execution>
+						<id>parse-version</id>
+						<goals>
+							<goal>parse-version</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
         </plugins>
     </build>
     

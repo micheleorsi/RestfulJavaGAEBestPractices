@@ -3,8 +3,8 @@
  */
 package it.micheleorsi.web;
 
-import it.micheleorsi.endpoints.MessageResourceImpl;
-import it.micheleorsi.endpoints.intefaces.MessageResource;
+import it.micheleorsi.endpoints.MessageResource;
+import it.micheleorsi.endpoints.impl.MessageResourceImpl;
 
 import java.util.HashSet;
 import java.util.Set;

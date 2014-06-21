@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.micheleorsi.endpoints.intefaces;
+package it.micheleorsi.endpoints;
 
 import it.micheleorsi.auth.model.User.Role;
 import it.micheleorsi.model.Message;

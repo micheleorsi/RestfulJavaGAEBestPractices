@@ -1,15 +1,14 @@
 /**
  * 
  */
-package it.micheleorsi.endpoints;
+package it.micheleorsi.endpoints.impl;
 
+import it.micheleorsi.endpoints.MessageResource;
 import it.micheleorsi.model.Message;
 import it.micheleorsi.persistence.Dao;
 
 import javax.inject.Inject;
 import javax.ws.rs.Path;
-
-import it.micheleorsi.endpoints.intefaces.MessageResource;
 /**
  * @author micheleorsi
  *

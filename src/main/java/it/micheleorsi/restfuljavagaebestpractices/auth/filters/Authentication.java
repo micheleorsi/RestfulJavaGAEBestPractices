@@ -3,14 +3,12 @@
  */
 package it.micheleorsi.restfuljavagaebestpractices.auth.filters;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import it.micheleorsi.restfuljavagaebestpractices.auth.filters.enums.AuthType;
-import it.micheleorsi.restfuljavagaebestpractices.auth.model.Session;
-import it.micheleorsi.restfuljavagaebestpractices.auth.model.User;
+import it.micheleorsi.restfuljavagaebestpractices.persistence.DAOFactory;
+import it.micheleorsi.restfuljavagaebestpractices.persistence.DAOFactory.Type;
+import it.micheleorsi.restfuljavagaebestpractices.persistence.UserDAO;
 import it.micheleorsi.restfuljavagaebestpractices.persistence.clouddatastore.CloudDatastoreUserDAO;
 
 import javax.ws.rs.WebApplicationException;
@@ -29,21 +27,23 @@ import com.sun.jersey.spi.container.ResourceFilter;
  */
 public class Authentication implements ResourceFilter, ContainerRequestFilter {
 	
+	public enum AuthType {
+		SESSION,
+		BASIC,
+		OAUTH1
+	}
+	
 	private Logger log = Logger.getLogger(Authentication.class.getName());
-	private CloudDatastoreUserDAO userRepo = null;
+	private UserDAO userRepo = null;
 	
 	public Authentication() {
 		log.info("init");
-		userRepo = new CloudDatastoreUserDAO();
+		userRepo = DAOFactory.getDAOFactory(Type.CLOUD_DATASTORE).getUserDAO();
 	}
 	
 	@Override
     public ContainerRequest filter(ContainerRequest request) {
 		log.info("start ContainerRequest");
-		//GET, POST, PUT, DELETE, ...
-        String method = request.getMethod();
-        // myresource/get/56bCA for example
-        String path = request.getPath(true);
  
         //Get the authentification passed in HTTP headers parameters
         String authHeader = request.getHeaderValue("Authorization");

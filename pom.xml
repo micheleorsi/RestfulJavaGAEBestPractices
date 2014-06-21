@@ -18,11 +18,10 @@
     <properties>
     	<appengine.app.name>micheletests</appengine.app.name>
         <appengine.app.version>version1</appengine.app.version>
-        <appengine.target.version>1.9.4</appengine.target.version>
+        <appengine.target.version>1.9.6</appengine.target.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jersey.version>1.18.1</jersey.version>
-        <jackson.version>2.4.0-rc2</jackson.version>
-<!--         <juel.version>2.2.7-SNAPSHOT</juel.version> -->
+        <jackson.version>2.4.1</jackson.version>
     </properties>
 
     <dependencies>

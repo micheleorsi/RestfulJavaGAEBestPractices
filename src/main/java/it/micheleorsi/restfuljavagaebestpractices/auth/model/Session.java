@@ -10,14 +10,13 @@ import java.util.Date;
  * @author micheleorsi
  *
  */
-public class Session implements Serializable {
-    // 
+public class Session implements Serializable { 
     private static final long serialVersionUID = -7483170872690892182L;
-     
-    private String sessionId;   // id
-    private String userId;      // user
-    private boolean active;     // session active?
-    private boolean secure;     // session secure?
+
+    private String sessionId;
+    private String userId;
+    private boolean active;
+    private boolean secure;
  
     private Date createTime;    // session create time
     private Date lastAccessedTime;  // session last use time

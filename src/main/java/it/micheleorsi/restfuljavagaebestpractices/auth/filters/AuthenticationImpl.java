@@ -30,14 +30,13 @@ public class AuthenticationImpl implements Authentication {
 		SESSION, BASIC, OAUTH1
 	}
 
-	private static final Logger LOG = Logger.getLogger(AuthenticationImpl.class
-			.getName());
+	private final Logger LOG;
 	private final UserDAO userRepo;
 
 	@Inject
-	public AuthenticationImpl(UserDAO userDAO) {
-		LOG.info("init");
+	public AuthenticationImpl(UserDAO userDAO, Logger logger) {
 		this.userRepo = userDAO;
+		this.LOG = logger;
 	}
 
 	@Override

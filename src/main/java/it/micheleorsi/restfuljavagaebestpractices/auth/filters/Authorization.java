@@ -7,6 +7,7 @@ import java.security.Principal;
 import java.util.logging.Logger;
 
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.Response.Status;
 
 import it.micheleorsi.restfuljavagaebestpractices.auth.model.User;
@@ -15,7 +16,7 @@ import it.micheleorsi.restfuljavagaebestpractices.auth.model.User;
  * @author micheleorsi
  *
  */
-public class Authorization implements javax.ws.rs.core.SecurityContext {
+public class Authorization implements SecurityContext {
 	
 	private static final Logger LOG = Logger.getLogger(Authorization.class.getName());
 	 

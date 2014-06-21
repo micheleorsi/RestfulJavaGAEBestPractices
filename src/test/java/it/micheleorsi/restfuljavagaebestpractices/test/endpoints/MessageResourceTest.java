@@ -34,7 +34,7 @@ public class MessageResourceTest extends EndpointTest {
 	/**
 	 * Test method for {@link it.micheleorsi.restfuljavagaebestpractices.endpoints.MessageResource#getResource(java.lang.String)}.
 	 */
-//	@Test
+	@Test
 	public void testGetResource() {
 		WebResource webResource = resource();
         Message responseMsg = webResource
@@ -64,6 +64,7 @@ public class MessageResourceTest extends EndpointTest {
 	        .header("Authorization", "Basic ZW1haWxAdGVzdC5jb206cGFzc3dvcmQ=")
 	        .entity(new Message("subj", "body", Integer.valueOf(10)))
 	        .post(Message.class);
+		assertEquals(Integer.valueOf(10), responseMsg.getId());
 	}
 
 	/**

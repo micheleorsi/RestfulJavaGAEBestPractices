@@ -5,7 +5,7 @@ package it.micheleorsi.restfuljavagaebestpractices.endpoints.impl;
 
 import it.micheleorsi.restfuljavagaebestpractices.endpoints.MessageResource;
 import it.micheleorsi.restfuljavagaebestpractices.model.Message;
-import it.micheleorsi.restfuljavagaebestpractices.persistence.Dao;
+import it.micheleorsi.restfuljavagaebestpractices.persistence.DAO;
 
 import javax.inject.Inject;
 import javax.ws.rs.Path;

@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import it.micheleorsi.restfuljavagaebestpractices.auth.filters.enums.AuthType;
 import it.micheleorsi.restfuljavagaebestpractices.auth.model.Session;
 import it.micheleorsi.restfuljavagaebestpractices.auth.model.User;
-import it.micheleorsi.restfuljavagaebestpractices.persistence.UserRepository;
+import it.micheleorsi.restfuljavagaebestpractices.persistence.clouddatastore.CloudDatastoreUserDAO;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response.Status;
@@ -30,11 +30,11 @@ import com.sun.jersey.spi.container.ResourceFilter;
 public class Authentication implements ResourceFilter, ContainerRequestFilter {
 	
 	private Logger log = Logger.getLogger(Authentication.class.getName());
-	private UserRepository userRepo = null;
+	private CloudDatastoreUserDAO userRepo = null;
 	
 	public Authentication() {
 		log.info("init");
-		userRepo = new UserRepository();
+		userRepo = new CloudDatastoreUserDAO();
 	}
 	
 	@Override
@@ -140,7 +140,7 @@ public class Authentication implements ResourceFilter, ContainerRequestFilter {
  
      // Set security context
         log.info("authSchema: "+authSchema);
-        request.setSecurityContext(new Authorization(request.isSecure(), authSchema, userRepo.getUser(userKey)));
+        request.setSecurityContext(new Authorization(request.isSecure(), authSchema, userRepo.getById(userKey)));
         
         log.info("ready to return");
         return request;

@@ -1,10 +1,6 @@
 package it.micheleorsi.restfuljavagaebestpractices.persistence;
 
-import java.util.List;
-
-public interface Dao<T> {
-
-	 List<? extends T> getAll();
+public interface DAO<T> {
 
 	 T getById(String id);
 

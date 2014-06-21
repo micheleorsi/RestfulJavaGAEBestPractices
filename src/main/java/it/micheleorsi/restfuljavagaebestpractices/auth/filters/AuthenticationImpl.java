@@ -3,6 +3,7 @@
  */
 package it.micheleorsi.restfuljavagaebestpractices.auth.filters;
 
+import it.micheleorsi.restfuljavagaebestpractices.auth.model.User;
 import it.micheleorsi.restfuljavagaebestpractices.persistence.UserDAO;
 
 import java.util.StringTokenizer;
@@ -10,8 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.SecurityContext;
 import javax.xml.bind.DatatypeConverter;
 
@@ -27,102 +26,107 @@ import com.sun.jersey.spi.container.ContainerResponseFilter;
 public class AuthenticationImpl implements Authentication {
 
 	public enum AuthType {
-		SESSION, BASIC, OAUTH1
+		BASIC, OAUTH1
 	}
 
-	private final Logger LOG;
+	private final Logger log;
 	private final UserDAO userRepo;
-
+	
 	@Inject
 	public AuthenticationImpl(UserDAO userDAO, Logger logger) {
 		this.userRepo = userDAO;
-		this.LOG = logger;
+		this.log = logger;
+	}
+	
+	private String getUserLoggedFromBasicAuth(ContainerRequest request) {
+		String userKey;
+		// check it uses https
+		if (!request.isSecure() && SystemProperty.environment.value() != null) {
+			return null;
+		} 
+
+		// directly
+		String authHeader = request.getHeaderValue("Authorization");
+		authHeader = authHeader.replaceFirst("[B|b]asic ", "");
+
+		// Decode the Base64 into byte[]
+		byte[] decodedBytes = DatatypeConverter
+				.parseBase64Binary(authHeader);
+
+		// If the decode fails in any case
+		if (decodedBytes == null || decodedBytes.length == 0) {
+			return null;
+		}
+
+		// Now we can convert the byte[] into a splitted array :
+		// - the first one is login,
+		// - the second one password
+		String[] lap = new String(decodedBytes).split(":", 2);
+
+		// If login or password fail
+		if (lap == null || lap.length != 2) {
+			return null;
+		} else {
+			userKey = lap[0];
+		}
+		return userKey;
 	}
 
 	@Override
 	public ContainerRequest filter(ContainerRequest request) {
-		LOG.info("start ContainerRequest");
+		log.info("start ContainerRequest");
 
 		// Get the authentification passed in HTTP headers parameters
 		String authHeader = request.getHeaderValue("Authorization");
-		LOG.info("authHeader " + authHeader);
-		LOG.info("Content-Type: " + request.getHeaderValue("Content-Type"));
-		LOG.info("Accept: " + request.getHeaderValue("Accept"));
-
-		String userKey = null;
 		String authSchema = null;
-
+		String userKey = null;
+		
 		if (authHeader != null && !authHeader.isEmpty()) {
-			LOG.info("work on AuthType");
+			log.info("work on AuthType");
 			StringTokenizer strToken = new StringTokenizer(authHeader, " ");
 			AuthType authType = null;
 
 			if (strToken.hasMoreTokens()) {
-				LOG.info("strToken.hasMoreTokens");
-				String nextToken = strToken.nextToken().toLowerCase()
+				log.info("strToken.hasMoreTokens");
+				String authTypeString = strToken.nextToken().toLowerCase()
 						.toUpperCase();
 				try {
-					authType = AuthType.valueOf(nextToken);
+					authType = AuthType.valueOf(authTypeString);
 
 					switch (authType) {
-					case BASIC:
-						LOG.info("Basic auth");
-
-						// check it uses https
-						if (!request.isSecure() && SystemProperty.environment.value() != null) {
-							throw new WebApplicationException(
-									Status.UNAUTHORIZED);
-						} 
-
-						authSchema = SecurityContext.BASIC_AUTH;
-						// basic auth
-						// lap : loginAndPassword
-						// Replacing "Basic THE_BASE_64" to "THE_BASE_64"
-						// directly
-						authHeader = authHeader.replaceFirst("[B|b]asic ", "");
-
-						// Decode the Base64 into byte[]
-						byte[] decodedBytes = DatatypeConverter
-								.parseBase64Binary(authHeader);
-
-						// If the decode fails in any case
-						if (decodedBytes == null || decodedBytes.length == 0) {
-							return null;
-						}
-
-						// Now we can convert the byte[] into a splitted array :
-						// - the first one is login,
-						// - the second one password
-						String[] lap = new String(decodedBytes).split(":", 2);
-
-						// If login or password fail
-						if (lap == null || lap.length != 2) {
-							LOG.info("lap is null");
-							throw new WebApplicationException(
-									Status.UNAUTHORIZED);
-						} else {
-							LOG.info("userid " + lap[0]);
-							LOG.info("password " + lap[1]);
-							userKey = lap[0];
-						}
-						break;
-
-					default:
-						break;
+						case BASIC:
+							log.info("BASIC auth");
+							authSchema = SecurityContext.BASIC_AUTH;
+							userKey = this.getUserLoggedFromBasicAuth(request);
+							break;
+							
+						case OAUTH1:
+							log.info("OAUTH1 auth");
+							authSchema = AuthType.OAUTH1.toString();
+							break;
+	
+						default:
+							break;
 					}
 				} catch (IllegalArgumentException ex) {
-					LOG.log(Level.WARNING, "illegal auth type provided " + nextToken, ex);
+					log.log(Level.WARNING, "illegal auth type provided " + authTypeString, ex);
 				}
 			}
 
 		}
+		
+		User user = null;
+		if(userKey!=null) {
+			user = userRepo.getById(userKey);
+		} 
 
 		// Set security context
-		LOG.info("authSchema: " + authSchema);
+		log.info("authSchema: " + authSchema);
 		request.setSecurityContext(new Authorization(request.isSecure(),
-				authSchema, userRepo.getById(userKey)));
+				authSchema, 
+				user));
 
-		LOG.info("ready to return");
+		log.info("ready to return");
 		return request;
 	}
 

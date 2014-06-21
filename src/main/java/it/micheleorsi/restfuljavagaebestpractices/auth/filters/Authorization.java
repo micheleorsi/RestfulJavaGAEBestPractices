@@ -4,7 +4,6 @@
 package it.micheleorsi.restfuljavagaebestpractices.auth.filters;
 
 import java.security.Principal;
-import java.util.logging.Logger;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.SecurityContext;
@@ -16,10 +15,7 @@ import it.micheleorsi.restfuljavagaebestpractices.auth.model.User;
  * @author micheleorsi
  *
  */
-public class Authorization implements SecurityContext {
-	
-	private static final Logger LOG = Logger.getLogger(Authorization.class.getName());
-	 
+public class Authorization implements SecurityContext {	 
     private final User user;
     private final Boolean secure;
     private final String authSchema;
@@ -47,11 +43,7 @@ public class Authorization implements SecurityContext {
  
     @Override
     public boolean isUserInRole(String role) {    	
-    	if(this.authSchema == null) {
-        	LOG.info("auth is null");
-            throw new WebApplicationException(Status.UNAUTHORIZED);
-        } else if(this.user == null) {
-        	LOG.info("user is null");
+    	if(this.authSchema == null || user==null) {
             throw new WebApplicationException(Status.UNAUTHORIZED);
         }
     	

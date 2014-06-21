@@ -13,6 +13,7 @@ import it.micheleorsi.restfuljavagaebestpractices.model.Message;
 
 import org.junit.Test;
 
+import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.client.urlconnection.HTTPSProperties;
 
@@ -80,8 +81,21 @@ public class MessageResourceTest extends EndpointTest {
 
 	/**
 	 * Test method for {@link it.micheleorsi.restfuljavagaebestpractices.endpoints.MessageResource#deleteResource(java.lang.String)}.
+	 * @throws NoSuchAlgorithmException 
 	 */
 	@Test
-	public void testDeleteResource() {
+	public void testDeleteResource() throws NoSuchAlgorithmException {
+		WebResource webResource = resource();
+		webResource.setProperty(HTTPSProperties.PROPERTY_HTTPS_PROPERTIES, new HTTPSProperties());
+		try {
+			webResource
+		        .path("messages/123")
+		        .accept(MediaType.APPLICATION_JSON)
+		        .header("Authorization", "Basic MjpwYXNzd29yZA==")
+		        .delete(Message.class);
+			fail("it should not pass from here");
+		} catch(UniformInterfaceException ex) {
+			assertTrue(true);
+		} 
 	}
 }

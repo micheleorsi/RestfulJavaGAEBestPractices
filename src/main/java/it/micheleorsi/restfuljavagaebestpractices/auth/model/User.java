@@ -3,13 +3,14 @@
  */
 package it.micheleorsi.restfuljavagaebestpractices.auth.model;
 
+import java.security.Principal;
 import java.util.Set;
 
 /**
  * @author
  * 
  */
-public class User implements java.security.Principal {
+public class User implements Principal {
 	// Role
 	public enum Role {
 		EDITOR(Values.EDITOR), 
@@ -29,20 +30,20 @@ public class User implements java.security.Principal {
 		}
 	};
 
-	private String userId; // id
-	private String name; // name
-	private String emailAddress; // email
-	private String password; // password
-	private Set<Role> roles; // roles
+	private String userId; 
+	private String name; 
+	private String emailAddress; 
+	private String secret; 
+	private Set<Role> roles; 
 
 	public User(String emailAddress, String password, Set<Role> roles) {
 		this(emailAddress, password);
 		this.roles = roles;
 	}
 
-	public User(String emailAddress, String password) {
+	public User(String emailAddress, String secret) {
 		this.emailAddress = emailAddress;
-		this.password = password;
+		this.secret = secret;
 	}
 
 	// getters/setters here
@@ -80,12 +81,11 @@ public class User implements java.security.Principal {
 		this.name = name;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getSecret() {
+		return secret;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setSecret(String secret) {
+		this.secret = secret;
 	}
-
 }

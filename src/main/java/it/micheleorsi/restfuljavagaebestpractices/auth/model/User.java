@@ -45,6 +45,9 @@ public class User implements Principal {
 		this.emailAddress = emailAddress;
 		this.secret = secret;
 	}
+	
+	public User() {
+	}
 
 	// getters/setters here
 

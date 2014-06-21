@@ -3,12 +3,13 @@ package it.micheleorsi.restfuljavagaebestpractices.web;
 import it.micheleorsi.restfuljavagaebestpractices.auth.filters.Authentication;
 import it.micheleorsi.restfuljavagaebestpractices.auth.filters.AuthenticationImpl;
 import it.micheleorsi.restfuljavagaebestpractices.auth.filters.ResourceSecurity;
+import it.micheleorsi.restfuljavagaebestpractices.endpoints.JWTResource;
 import it.micheleorsi.restfuljavagaebestpractices.endpoints.MessageResource;
+import it.micheleorsi.restfuljavagaebestpractices.endpoints.impl.JWTResourceImpl;
 import it.micheleorsi.restfuljavagaebestpractices.endpoints.impl.MessageResourceImpl;
 import it.micheleorsi.restfuljavagaebestpractices.persistence.MessageDAO;
 import it.micheleorsi.restfuljavagaebestpractices.persistence.UserDAO;
 import it.micheleorsi.restfuljavagaebestpractices.persistence.clouddatastore.CloudDatastoreMessageDAO;
-import it.micheleorsi.restfuljavagaebestpractices.persistence.clouddatastore.CloudDatastoreUserDAO;
 import it.micheleorsi.restfuljavagaebestpractices.persistence.clouddatastore.CloudDatastoreUserDAOMock;
 import it.micheleorsi.restfuljavagaebestpractices.utils.Constants;
 
@@ -41,6 +42,7 @@ public class IoCConfiguration extends GuiceServletContextListener {
 
 			// REST resources
 			bind(MessageResource.class).to(MessageResourceImpl.class);
+			bind(JWTResource.class).to(JWTResourceImpl.class);
 
 			// persistence layer
 			bind(UserDAO.class).to(CloudDatastoreUserDAOMock.class);

@@ -1,11 +1,11 @@
 /**
  * 
  */
-package it.micheleorsi.persistence;
+package it.micheleorsi.restfuljavagaebestpractices.persistence;
 
 import java.util.List;
 
-import it.micheleorsi.model.Message;
+import it.micheleorsi.restfuljavagaebestpractices.model.Message;
 
 /**
  * @author micheleorsi

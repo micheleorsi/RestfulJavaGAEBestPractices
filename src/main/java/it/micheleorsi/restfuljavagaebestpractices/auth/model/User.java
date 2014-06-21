@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.micheleorsi.auth.model;
+package it.micheleorsi.restfuljavagaebestpractices.auth.model;
 
 import java.util.Set;
 

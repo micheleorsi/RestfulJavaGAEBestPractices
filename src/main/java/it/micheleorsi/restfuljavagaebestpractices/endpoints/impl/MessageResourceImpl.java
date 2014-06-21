@@ -1,11 +1,11 @@
 /**
  * 
  */
-package it.micheleorsi.endpoints.impl;
+package it.micheleorsi.restfuljavagaebestpractices.endpoints.impl;
 
-import it.micheleorsi.endpoints.MessageResource;
-import it.micheleorsi.model.Message;
-import it.micheleorsi.persistence.Dao;
+import it.micheleorsi.restfuljavagaebestpractices.endpoints.MessageResource;
+import it.micheleorsi.restfuljavagaebestpractices.model.Message;
+import it.micheleorsi.restfuljavagaebestpractices.persistence.Dao;
 
 import javax.inject.Inject;
 import javax.ws.rs.Path;
@@ -25,7 +25,7 @@ public class MessageResourceImpl implements MessageResource {
 	@Override
 	public Message getResource(String id) {
 //		String stuff = dao.getById(id);
-		return new Message("text subject","text body",id);
+		return new Message("text subject","text body",Integer.valueOf(id));
 	}
 	@Override
 	public Message createResource(Message message) {

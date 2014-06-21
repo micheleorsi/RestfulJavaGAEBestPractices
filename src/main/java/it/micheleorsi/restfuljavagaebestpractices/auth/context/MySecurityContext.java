@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.micheleorsi.auth.context;
+package it.micheleorsi.restfuljavagaebestpractices.auth.context;
 
 import java.security.Principal;
 import java.util.logging.Logger;
@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response.Status;
 
-import it.micheleorsi.auth.model.User;
+import it.micheleorsi.restfuljavagaebestpractices.auth.model.User;
 
 /**
  * @author micheleorsi

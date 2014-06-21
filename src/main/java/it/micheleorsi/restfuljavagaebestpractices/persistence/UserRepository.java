@@ -1,9 +1,9 @@
 /**
  * 
  */
-package it.micheleorsi.persistence;
+package it.micheleorsi.restfuljavagaebestpractices.persistence;
 
-import it.micheleorsi.auth.model.User;
+import it.micheleorsi.restfuljavagaebestpractices.auth.model.User;
 
 import java.util.HashMap;
 import java.util.Map;

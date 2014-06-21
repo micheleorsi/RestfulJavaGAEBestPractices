@@ -1,15 +1,15 @@
 /**
  * 
  */
-package it.micheleorsi.auth.filter;
+package it.micheleorsi.restfuljavagaebestpractices.auth.filter;
 
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
-import it.micheleorsi.auth.context.MySecurityContext;
-import it.micheleorsi.auth.filter.enums.AuthType;
-import it.micheleorsi.auth.model.Session;
-import it.micheleorsi.auth.model.User;
+import it.micheleorsi.restfuljavagaebestpractices.auth.context.MySecurityContext;
+import it.micheleorsi.restfuljavagaebestpractices.auth.filter.enums.AuthType;
+import it.micheleorsi.restfuljavagaebestpractices.auth.model.Session;
+import it.micheleorsi.restfuljavagaebestpractices.auth.model.User;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response.Status;

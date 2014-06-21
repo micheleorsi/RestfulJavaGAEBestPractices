@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.micheleorsi.auth.filter;
+package it.micheleorsi.restfuljavagaebestpractices.auth.filter;
 
 import java.util.ArrayList;
 import java.util.List;

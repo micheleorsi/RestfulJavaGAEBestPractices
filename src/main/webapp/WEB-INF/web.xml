@@ -16,7 +16,7 @@
 	</filter-mapping>
 
 	<listener>
-		<listener-class>it.micheleorsi.web.MainGuice</listener-class>
+		<listener-class>it.micheleorsi.restfuljavagaebestpractices.web.MainGuice</listener-class>
 	</listener>
 
 </web-app>

@@ -1,10 +1,11 @@
 /**
  * 
  */
-package it.micheleorsi.endpoints;
+package it.micheleorsi.restfuljavagaebestpractices.endpoints;
 
-import it.micheleorsi.auth.model.User.Role;
-import it.micheleorsi.model.Message;
+import it.micheleorsi.restfuljavagaebestpractices.auth.model.User.Role;
+import it.micheleorsi.restfuljavagaebestpractices.model.Message;
+import it.micheleorsi.restfuljavagaebestpractices.utils.Constants;
 
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
@@ -22,7 +23,7 @@ import javax.ws.rs.core.MediaType;
  * @author micheleorsi
  *
  */
-@Path("messages")
+@Path(Constants.MESSAGE_PATH)
 public interface MessageResource {
 	
 	@GET

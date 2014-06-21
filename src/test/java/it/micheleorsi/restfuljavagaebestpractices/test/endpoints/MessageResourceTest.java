@@ -5,13 +5,21 @@ package it.micheleorsi.restfuljavagaebestpractices.test.endpoints;
 
 import static org.junit.Assert.*;
 
+import java.security.NoSuchAlgorithmException;
+
+import javax.net.ssl.SSLContext;
 import javax.ws.rs.core.MediaType;
 
 import it.micheleorsi.restfuljavagaebestpractices.model.Message;
+
 import org.junit.Test;
 
+import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.client.urlconnection.HTTPSProperties;
 
 /**
  * @author micheleorsi
@@ -26,7 +34,7 @@ public class MessageResourceTest extends EndpointTest {
 	/**
 	 * Test method for {@link it.micheleorsi.restfuljavagaebestpractices.endpoints.MessageResource#getResource(java.lang.String)}.
 	 */
-	@Test
+//	@Test
 	public void testGetResource() {
 		WebResource webResource = resource();
         Message responseMsg = webResource
@@ -43,18 +51,19 @@ public class MessageResourceTest extends EndpointTest {
 	
 	/**
 	 * Test method for {@link it.micheleorsi.restfuljavagaebestpractices.endpoints.MessageResource#createResource(it.micheleorsi.restfuljavagaebestpractices.model.Message)}.
+	 * @throws NoSuchAlgorithmException 
 	 */
 	@Test
-	public void testCreateResource() {
+	public void testCreateResource() throws NoSuchAlgorithmException {
 		WebResource webResource = resource();
-		try {
-			Message responseMsg = webResource
-	        		.path("messages")
-	        		.entity(new Message("subj", "body", Integer.valueOf(10)))
-	        		.post(Message.class);
-		} catch(UniformInterfaceException e) {
-			assertTrue(true);
-		}
+		webResource.setProperty(HTTPSProperties.PROPERTY_HTTPS_PROPERTIES, new HTTPSProperties());
+		Message responseMsg = webResource
+	        .path("messages")
+	        .accept(MediaType.APPLICATION_JSON)
+	        .type(MediaType.APPLICATION_JSON)
+	        .header("Authorization", "Basic ZW1haWxAdGVzdC5jb206cGFzc3dvcmQ=")
+	        .entity(new Message("subj", "body", Integer.valueOf(10)))
+	        .post(Message.class);
 	}
 
 	/**

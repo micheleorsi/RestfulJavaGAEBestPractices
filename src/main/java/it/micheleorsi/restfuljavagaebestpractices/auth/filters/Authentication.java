@@ -3,6 +3,8 @@
  */
 package it.micheleorsi.restfuljavagaebestpractices.auth.filters;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
@@ -13,20 +15,17 @@ import it.micheleorsi.restfuljavagaebestpractices.auth.model.User;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.SecurityContext;
-import javax.ws.rs.ext.Provider;
 import javax.xml.bind.DatatypeConverter;
 
 import com.sun.jersey.spi.container.ContainerRequest;
 import com.sun.jersey.spi.container.ContainerRequestFilter;
 import com.sun.jersey.spi.container.ContainerResponseFilter;
 import com.sun.jersey.spi.container.ResourceFilter;
-import com.sun.jersey.spi.resource.Singleton;
 
 /**
  * @author micheleorsi
  *
  */
-@Provider // register as jersey's provider
 public class Authentication implements ResourceFilter, ContainerRequestFilter {
 	
 	Logger log = Logger.getLogger(Authentication.class.getName());
@@ -44,7 +43,10 @@ public class Authentication implements ResourceFilter, ContainerRequestFilter {
         String path = request.getPath(true);
  
         //Get the authentification passed in HTTP headers parameters
-        String authHeader = request.getHeaderValue("authorization");
+        String authHeader = request.getHeaderValue("Authorization");
+        log.info("authHeader "+authHeader);
+        log.info("Content-Type: "+request.getHeaderValue("Content-Type"));
+        log.info("Accept: "+request.getHeaderValue("Accept"));
         
         User user = null;
         String authSchema = null;
@@ -64,10 +66,11 @@ public class Authentication implements ResourceFilter, ContainerRequestFilter {
     	    		case BASIC:
     	    			log.info("Basic auth");
     	    			
-    	    			if(!request.isSecure()) {
-    	    				log.info("request is not secure");
-    	                    throw new WebApplicationException(Status.UNAUTHORIZED);
-    	    			}
+    	    			// check it uses https
+//    	    			if(!request.isSecure()) {
+//    	    				log.info("request is not secure");
+//    	                    throw new WebApplicationException(Status.UNAUTHORIZED);
+//    	    			} FIXME:
     	    			
     	            	authSchema = SecurityContext.BASIC_AUTH;
     	            	// basic auth
@@ -132,6 +135,10 @@ public class Authentication implements ResourceFilter, ContainerRequestFilter {
 //        }
  
      // Set security context
+        log.info("authSchema: "+authSchema);
+        Set<User.Role> roles = new HashSet<User.Role>();
+        roles.add(User.Role.CONTRIBUTOR);
+        user = new User("email@test.com", "password", roles);
         request.setSecurityContext(new Authorization(request.isSecure(), authSchema, user));
         
         log.info("ready to return");

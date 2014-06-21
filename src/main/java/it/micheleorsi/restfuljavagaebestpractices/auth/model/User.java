@@ -19,9 +19,9 @@ public class User implements java.security.Principal {
         private Role(String label) {}
         
         public static class Values {
-            public static final String EDITOR = "Editor";
-            public static final String VISITOR = "Visitor";
-            public static final String CONTRIBUTOR = "Contributor";
+            public static final String EDITOR = "EDITOR";
+            public static final String VISITOR = "VISITOR";
+            public static final String CONTRIBUTOR = "CONTRIBUTOR";
         }
     };
  
@@ -30,6 +30,11 @@ public class User implements java.security.Principal {
     private String emailAddress;    // email
     private String password;		// password
     private Set<Role> roles;        // roles
+    
+    public User(String emailAddress, String password, Set<Role> roles) {
+    	this(emailAddress,password);
+    	this.roles = roles;
+    }
     
     public User(String emailAddress, String password) {
     	this.emailAddress = emailAddress;

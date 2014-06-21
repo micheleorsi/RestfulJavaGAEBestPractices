@@ -24,7 +24,7 @@ public class Authorization implements javax.ws.rs.core.SecurityContext {
     private final String authSchema;
  
     public Authorization(Boolean secure, String authSchema, User user) {
-    	log.info("init");
+    	log.info("init "+authSchema);
     	
     	this.secure = secure;
         this.user = user;
@@ -48,18 +48,23 @@ public class Authorization implements javax.ws.rs.core.SecurityContext {
  
     @Override
     public boolean isUserInRole(String role) {    	
-    	log.info("check role");
+    	log.info("check role "+authSchema);
     	
-    	if(this.authSchema == null || this.user == null){
+    	if(this.authSchema == null) {
         	log.info("auth is null");
             throw new WebApplicationException(Status.UNAUTHORIZED);
-        } 
+        } else if(this.user == null) {
+        	log.info("user is null");
+            throw new WebApplicationException(Status.UNAUTHORIZED);
+        }
     	
     	boolean returnValue = false;
  
         try {
             // this user has this role?
-        	returnValue = user.getRoles().contains(User.Role.valueOf(role));
+        	log.info(""+user.getRoles());
+        	log.info(""+user.getRoles().contains(User.Role.valueOf(role.toUpperCase())));
+        	returnValue = user.getRoles().contains(User.Role.valueOf(role.toUpperCase()));
         } catch (Exception e) {
         	log.warning(e.getMessage());
         }

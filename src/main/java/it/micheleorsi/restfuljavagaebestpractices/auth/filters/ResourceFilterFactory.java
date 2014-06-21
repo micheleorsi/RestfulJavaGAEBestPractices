@@ -6,8 +6,6 @@ package it.micheleorsi.restfuljavagaebestpractices.auth.filters;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.ext.Provider;
-
 import com.sun.jersey.api.container.filter.RolesAllowedResourceFilterFactory;
 import com.sun.jersey.api.model.AbstractMethod;
 import com.sun.jersey.spi.container.ResourceFilter;
@@ -16,7 +14,6 @@ import com.sun.jersey.spi.container.ResourceFilter;
  * @author micheleorsi
  *
  */
-@Provider // register as jersey's provider
 public class ResourceFilterFactory extends RolesAllowedResourceFilterFactory {
 		
 	@Override

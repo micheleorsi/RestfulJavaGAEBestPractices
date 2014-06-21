@@ -1,8 +1,14 @@
 package it.micheleorsi.restfuljavagaebestpractices.web;
 
+import it.micheleorsi.restfuljavagaebestpractices.auth.filters.Authentication;
+import it.micheleorsi.restfuljavagaebestpractices.auth.filters.AuthenticationImpl;
 import it.micheleorsi.restfuljavagaebestpractices.auth.filters.ResourceFilterFactory;
 import it.micheleorsi.restfuljavagaebestpractices.endpoints.MessageResource;
 import it.micheleorsi.restfuljavagaebestpractices.endpoints.impl.MessageResourceImpl;
+import it.micheleorsi.restfuljavagaebestpractices.persistence.DAOFactory;
+import it.micheleorsi.restfuljavagaebestpractices.persistence.UserDAO;
+import it.micheleorsi.restfuljavagaebestpractices.persistence.DAOFactory.Type;
+import it.micheleorsi.restfuljavagaebestpractices.persistence.clouddatastore.CloudDatastoreUserDAO;
 import it.micheleorsi.restfuljavagaebestpractices.utils.Constants;
 
 import java.util.HashMap;
@@ -47,6 +53,8 @@ public class MainGuice extends GuiceServletContextListener {
 //        	bind(MainJerseyApplication.class).in(Singleton.class);
             bind(MessageResource.class).to(MessageResourceImpl.class);// .in(Singleton.class);
 //            bind(ServletContainer.class).in(Singleton.class);
+            bind(UserDAO.class).to(CloudDatastoreUserDAO.class);
+            bind(Authentication.class).to(AuthenticationImpl.class);
 
             // (2) Change to using the GuiceContainer
             serve(Constants.ROOT_PATH+"/*").with(GuiceContainer.class,params); // <<<<---

@@ -9,6 +9,7 @@ import it.micheleorsi.restfuljavagaebestpractices.persistence.MessageDAO;
 import it.micheleorsi.restfuljavagaebestpractices.persistence.UserDAO;
 import it.micheleorsi.restfuljavagaebestpractices.persistence.clouddatastore.CloudDatastoreMessageDAO;
 import it.micheleorsi.restfuljavagaebestpractices.persistence.clouddatastore.CloudDatastoreUserDAO;
+import it.micheleorsi.restfuljavagaebestpractices.persistence.clouddatastore.CloudDatastoreUserDAOMock;
 import it.micheleorsi.restfuljavagaebestpractices.utils.Constants;
 
 import java.util.HashMap;
@@ -42,7 +43,7 @@ public class IoCConfiguration extends GuiceServletContextListener {
 			bind(MessageResource.class).to(MessageResourceImpl.class);
 
 			// persistence layer
-			bind(UserDAO.class).to(CloudDatastoreUserDAO.class);
+			bind(UserDAO.class).to(CloudDatastoreUserDAOMock.class);
 			bind(MessageDAO.class).to(CloudDatastoreMessageDAO.class);
 
 			// auth layer

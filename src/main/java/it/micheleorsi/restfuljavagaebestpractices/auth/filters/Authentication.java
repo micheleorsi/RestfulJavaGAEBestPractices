@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import it.micheleorsi.restfuljavagaebestpractices.auth.filters.enums.AuthType;
 import it.micheleorsi.restfuljavagaebestpractices.auth.model.Session;
 import it.micheleorsi.restfuljavagaebestpractices.auth.model.User;
+import it.micheleorsi.restfuljavagaebestpractices.persistence.UserRepository;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response.Status;
@@ -28,10 +29,12 @@ import com.sun.jersey.spi.container.ResourceFilter;
  */
 public class Authentication implements ResourceFilter, ContainerRequestFilter {
 	
-	Logger log = Logger.getLogger(Authentication.class.getName());
+	private Logger log = Logger.getLogger(Authentication.class.getName());
+	private UserRepository userRepo = null;
 	
 	public Authentication() {
 		log.info("init");
+		userRepo = new UserRepository();
 	}
 	
 	@Override
@@ -48,7 +51,7 @@ public class Authentication implements ResourceFilter, ContainerRequestFilter {
         log.info("Content-Type: "+request.getHeaderValue("Content-Type"));
         log.info("Accept: "+request.getHeaderValue("Accept"));
         
-        User user = null;
+        String userKey = null;
         String authSchema = null;
         
         if(authHeader!=null && !authHeader.isEmpty()) {
@@ -98,6 +101,7 @@ public class Authentication implements ResourceFilter, ContainerRequestFilter {
     	                } else {
     	                	log.info("userid "+lap[0]);
     	                    log.info("password "+lap[1]);
+    	                    userKey = lap[0];
     	                }
     	    			break;
     	
@@ -136,10 +140,7 @@ public class Authentication implements ResourceFilter, ContainerRequestFilter {
  
      // Set security context
         log.info("authSchema: "+authSchema);
-        Set<User.Role> roles = new HashSet<User.Role>();
-        roles.add(User.Role.CONTRIBUTOR);
-        user = new User("email@test.com", "password", roles);
-        request.setSecurityContext(new Authorization(request.isSecure(), authSchema, user));
+        request.setSecurityContext(new Authorization(request.isSecure(), authSchema, userRepo.getUser(userKey)));
         
         log.info("ready to return");
         return request;

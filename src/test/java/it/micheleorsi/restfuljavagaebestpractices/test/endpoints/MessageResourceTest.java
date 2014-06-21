@@ -61,7 +61,7 @@ public class MessageResourceTest extends EndpointTest {
 	        .path("messages")
 	        .accept(MediaType.APPLICATION_JSON)
 	        .type(MediaType.APPLICATION_JSON)
-	        .header("Authorization", "Basic ZW1haWxAdGVzdC5jb206cGFzc3dvcmQ=")
+	        .header("Authorization", "Basic MjpwYXNzd29yZA==")
 	        .entity(new Message("subj", "body", Integer.valueOf(10)))
 	        .post(Message.class);
 		assertEquals(Integer.valueOf(10), responseMsg.getId());

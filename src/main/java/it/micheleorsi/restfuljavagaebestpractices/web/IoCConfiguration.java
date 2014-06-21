@@ -25,7 +25,7 @@ import com.sun.jersey.guice.JerseyServletModule;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
 
 
-public class MainGuice extends GuiceServletContextListener {
+public class IoCConfiguration extends GuiceServletContextListener {
 
     Logger logger = Logger.getLogger(this.getClass().getName());
 

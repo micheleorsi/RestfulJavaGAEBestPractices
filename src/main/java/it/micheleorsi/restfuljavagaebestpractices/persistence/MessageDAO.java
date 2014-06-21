@@ -7,6 +7,7 @@ import it.micheleorsi.restfuljavagaebestpractices.model.Message;
 
 /**
  * @author micheleorsi
- *
+ * 
  */
-public interface MessageDAO extends DAO<Message> {}
+public interface MessageDAO extends DAO<Message> {
+}

@@ -9,6 +9,9 @@ package it.micheleorsi.restfuljavagaebestpractices.utils;
  */
 public class Constants {
 	
+	private Constants() {
+	}
+	
 	public static final String ROOT_PATH = "/rest";
 	public static final String MESSAGE_PATH = "messages";
 

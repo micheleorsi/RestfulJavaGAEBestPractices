@@ -7,6 +7,7 @@ import it.micheleorsi.restfuljavagaebestpractices.auth.model.User;
 
 /**
  * @author micheleorsi
- *
+ * 
  */
-public interface UserDAO extends DAO<User> {}
+public interface UserDAO extends DAO<User> {
+}

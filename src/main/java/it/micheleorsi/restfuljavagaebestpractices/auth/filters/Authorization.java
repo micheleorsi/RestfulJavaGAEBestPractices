@@ -17,7 +17,7 @@ import it.micheleorsi.restfuljavagaebestpractices.auth.model.User;
  */
 public class Authorization implements javax.ws.rs.core.SecurityContext {
 	
-	private final Logger log = Logger.getLogger(Authorization.class.getName());
+	private static final Logger LOG = Logger.getLogger(Authorization.class.getName());
 	 
     private final User user;
     private final Boolean secure;
@@ -47,21 +47,18 @@ public class Authorization implements javax.ws.rs.core.SecurityContext {
     @Override
     public boolean isUserInRole(String role) {    	
     	if(this.authSchema == null) {
-        	log.info("auth is null");
+        	LOG.info("auth is null");
             throw new WebApplicationException(Status.UNAUTHORIZED);
         } else if(this.user == null) {
-        	log.info("user is null");
+        	LOG.info("user is null");
             throw new WebApplicationException(Status.UNAUTHORIZED);
         }
     	
     	boolean returnValue = false;
- 
-        try {
-            // this user has this role?
-        	returnValue = user.getRoles().contains(User.Role.valueOf(role.toUpperCase()));
-        } catch (Exception e) {
-        	log.warning(e.getMessage());
-        }
+    	
+    	// this user has this role?
+        returnValue = user.getRoles().contains(User.Role.valueOf(role.toUpperCase()));
+        
         return returnValue;
     }
 }

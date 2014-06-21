@@ -7,18 +7,13 @@ import static org.junit.Assert.*;
 
 import java.security.NoSuchAlgorithmException;
 
-import javax.net.ssl.SSLContext;
 import javax.ws.rs.core.MediaType;
 
 import it.micheleorsi.restfuljavagaebestpractices.model.Message;
 
 import org.junit.Test;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.config.ClientConfig;
-import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.client.urlconnection.HTTPSProperties;
 
 /**

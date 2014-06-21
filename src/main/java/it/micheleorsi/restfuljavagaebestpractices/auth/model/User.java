@@ -7,46 +7,50 @@ import java.util.Set;
 
 /**
  * @author
- *
+ * 
  */
 public class User implements java.security.Principal {
-    // Role
-    public enum Role {
-        EDITOR(Values.EDITOR), 
-        VISITOR(Values.VISITOR),
-        CONTRIBUTOR(Values.CONTRIBUTOR);
-        
-        private Role(String label) {}
-        
-        public static class Values {
-            public static final String EDITOR = "EDITOR";
-            public static final String VISITOR = "VISITOR";
-            public static final String CONTRIBUTOR = "CONTRIBUTOR";
-        }
-    };
- 
-    private String userId;          // id
-    private String name;            // name
-    private String emailAddress;    // email
-    private String password;		// password
-    private Set<Role> roles;        // roles
-    
-    public User(String emailAddress, String password, Set<Role> roles) {
-    	this(emailAddress,password);
-    	this.roles = roles;
-    }
-    
-    public User(String emailAddress, String password) {
-    	this.emailAddress = emailAddress;
-    	this.password = password;
-    }
+	// Role
+	public enum Role {
+		EDITOR(Values.EDITOR), 
+		VISITOR(Values.VISITOR), 
+		CONTRIBUTOR(Values.CONTRIBUTOR);
 
-    // getters/setters here
- 
-    @Override
-    public String getName() {
-        return name;
-    }
+		private Role(String label) {
+		}
+
+		public static class Values {
+			private Values() {
+			}
+			
+			public static final String EDITOR = "EDITOR";
+			public static final String VISITOR = "VISITOR";
+			public static final String CONTRIBUTOR = "CONTRIBUTOR";
+		}
+	};
+
+	private String userId; // id
+	private String name; // name
+	private String emailAddress; // email
+	private String password; // password
+	private Set<Role> roles; // roles
+
+	public User(String emailAddress, String password, Set<Role> roles) {
+		this(emailAddress, password);
+		this.roles = roles;
+	}
+
+	public User(String emailAddress, String password) {
+		this.emailAddress = emailAddress;
+		this.password = password;
+	}
+
+	// getters/setters here
+
+	@Override
+	public String getName() {
+		return name;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -83,5 +87,5 @@ public class User implements java.security.Principal {
 	public void setPassword(String password) {
 		this.password = password;
 	}
- 
+
 }

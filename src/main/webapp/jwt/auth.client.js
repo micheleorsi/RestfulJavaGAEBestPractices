@@ -26,7 +26,7 @@ myApp.controller('UserCtrl', function ($scope, $http, $window) {
   
   $scope.submit = function () {
     $http
-      .post('/rest/jwt/authenticate', $scope.user)
+      .post('/rest/authenticate', $scope.user)
       .success(function (data, status, headers, config) {
         $window.sessionStorage.token = data.token;
         $scope.isAuthenticated = true;
@@ -53,9 +53,9 @@ myApp.controller('UserCtrl', function ($scope, $http, $window) {
   };
 
   $scope.callRestricted = function () {
-    $http({url: '/rest/jwt/api/restricted', method: 'GET'})
+    $http({url: '/rest/messages/123', method: 'GET'})
     .success(function (data, status, headers, config) {
-      $scope.message = $scope.message + ' ' + data.body; // Should log 'foo'
+      $scope.message = $scope.message + ' ' + data.body; 
     })
     .error(function (data, status, headers, config) {
       alert(data);

@@ -40,7 +40,7 @@ public class AuthenticationImpl implements Authentication {
 	
 	private String getUserLoggedFromBasicAuth(ContainerRequest request) {
 		String userKey;
-		// check it uses https
+		// check if it uses https
 		if (!request.isSecure() && SystemProperty.environment.value() != null) {
 			return null;
 		} 
@@ -74,6 +74,12 @@ public class AuthenticationImpl implements Authentication {
 	
 	private String getUserLoggedFromBearerAuth(ContainerRequest request) {
 		String userKey;
+		
+		// check if it uses https
+		if (!request.isSecure() && SystemProperty.environment.value() != null) {
+			return null;
+		} 
+				
 		// directly
 		String authHeader = request.getHeaderValue("Authorization");
 		authHeader = authHeader.replaceFirst("[B|b]earer ", "");

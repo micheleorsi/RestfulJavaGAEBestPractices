@@ -19,7 +19,7 @@ function url_base64_decode(str) {
 }
 
 myApp.controller('UserCtrl', function ($scope, $http, $window) {
-  $scope.user = {name: 'john.doe', secret: 'foobar'};
+  $scope.user = {name: 'johndoe', secret: 'foobar'};
   $scope.isAuthenticated = $window.sessionStorage.token;
   $scope.welcome = '';
   $scope.message = '';

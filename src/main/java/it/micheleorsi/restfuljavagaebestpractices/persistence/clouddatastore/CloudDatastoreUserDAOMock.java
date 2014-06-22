@@ -20,14 +20,26 @@ public class CloudDatastoreUserDAOMock implements UserDAO {
 	private Map<String,User> userDb = new HashMap<String, User>();
 	
 	public CloudDatastoreUserDAOMock() {
-		// base64: MTpwYXNzd29yZA==
-		userDb.put("1", new User("myemail1@email.com", "password", new HashSet<User.Role>(Arrays.asList(User.Role.VISITOR)))); 
-		// base64: MjpwYXNzd29yZA==
-		userDb.put("2", new User("myemail2@email.com", "password", new HashSet<User.Role>(Arrays.asList(User.Role.CONTRIBUTOR)))); 
-		// base64: MzpwYXNzd29yZA==
-		userDb.put("3", new User("myemail3@email.com", "password", new HashSet<User.Role>(Arrays.asList(User.Role.EDITOR)))); 
-		// base64: NDpwYXNzd29yZA==
-		userDb.put("4", new User("myemail4@email.com", "password", new HashSet<User.Role>(Arrays.asList(User.Role.VISITOR)))); 
+		// base64: bXluYW1lMTpwYXNzd29yZA==
+		User user = new User("myname1", "password", new HashSet<User.Role>(Arrays.asList(User.Role.VISITOR)));
+		user.setKey("1");
+		userDb.put(user.getKey(), user); 
+		// base64: bXluYW1lMjpwYXNzd29yZA==
+		user = new User("myname2", "password", new HashSet<User.Role>(Arrays.asList(User.Role.CONTRIBUTOR)));
+		user.setKey("2");
+		userDb.put(user.getKey(), user);
+		// base64: 
+		user = new User("myname3", "password", new HashSet<User.Role>(Arrays.asList(User.Role.EDITOR))); 
+		user.setKey("3");
+		userDb.put(user.getKey(), user);
+		// base64: 
+		user = new User("myname4", "password", new HashSet<User.Role>(Arrays.asList(User.Role.VISITOR)));
+		user.setKey("4");
+		userDb.put(user.getKey(), user);
+		
+		user = new User("johndoe", "foobar", new HashSet<User.Role>(Arrays.asList(User.Role.CONTRIBUTOR)));
+		user.setKey("5");
+		userDb.put(user.getKey(), user);
 	}
 	
 	public User getById(String key) {

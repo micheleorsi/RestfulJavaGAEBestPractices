@@ -3,10 +3,12 @@
  */
 package it.micheleorsi.restfuljavagaebestpractices.endpoints.impl;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response.Status;
+
 import it.micheleorsi.restfuljavagaebestpractices.auth.model.User;
 import it.micheleorsi.restfuljavagaebestpractices.endpoints.JWTResource;
 import it.micheleorsi.restfuljavagaebestpractices.model.JWT;
-import it.micheleorsi.restfuljavagaebestpractices.model.Message;
 
 /**
  * @author micheleorsi
@@ -15,12 +17,12 @@ import it.micheleorsi.restfuljavagaebestpractices.model.Message;
 public class JWTResourceImpl implements JWTResource {
 
 	@Override
-	public JWT createResource(User user) {
-		return new JWT("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmaXJzdF9uYW1lIjoiSm9obiIsImxhc3RfbmFtZSI6IkRvZSIsImVtYWlsIjoiam9obkBkb2UuY29tIiwiaWQiOjEyMywiaWF0IjoxNDAzMzkxNDI1LCJleHAiOjE0MDM0MDk0MjV9.anN0Kr-yg9l3ak8CFVJrQGHfCxbFPKQ9V2Kzy5A1blI");
-	}
-
-	@Override
-	public Message restricted() {
-		return new Message("subject","body",Integer.valueOf(12));
+	public JWT createToken(User user) {
+		if(user.getName().equals("johndoe") && user.getSecret().equals("foobar")) {
+			return new JWT(5+"."+user.getName()+"."+user.getSecret());
+		} else {
+			throw new WebApplicationException(Status.UNAUTHORIZED);
+		}
+		
 	}
 }

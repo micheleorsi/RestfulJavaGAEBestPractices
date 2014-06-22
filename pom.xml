@@ -150,6 +150,13 @@
 			<artifactId>jsr250-api</artifactId>
 			<version>1.0</version>
 		</dependency>
+		
+		<!-- Json Web Token -->
+		<dependency>
+		    <groupId>com.auth0</groupId>
+		    <artifactId>java-jwt</artifactId>
+		    <version>0.2</version>
+		</dependency>
 
 
 	</dependencies>

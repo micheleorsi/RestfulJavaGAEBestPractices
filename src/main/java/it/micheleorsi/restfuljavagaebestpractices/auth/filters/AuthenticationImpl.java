@@ -26,7 +26,7 @@ import com.sun.jersey.spi.container.ContainerResponseFilter;
 public class AuthenticationImpl implements Authentication {
 
 	public enum AuthType {
-		BASIC, OAUTH1
+		BASIC, OAUTH1, BEARER
 	}
 
 	private final Logger log;
@@ -44,7 +44,7 @@ public class AuthenticationImpl implements Authentication {
 		if (!request.isSecure() && SystemProperty.environment.value() != null) {
 			return null;
 		} 
-
+		
 		// directly
 		String authHeader = request.getHeaderValue("Authorization");
 		authHeader = authHeader.replaceFirst("[B|b]asic ", "");
@@ -71,10 +71,31 @@ public class AuthenticationImpl implements Authentication {
 		}
 		return userKey;
 	}
+	
+	private String getUserLoggedFromBearerAuth(ContainerRequest request) {
+		String userKey;
+		// directly
+		String authHeader = request.getHeaderValue("Authorization");
+		authHeader = authHeader.replaceFirst("[B|b]earer ", "");
+		
+		//TODO: calculate real token
+
+		// - the first one is login,
+		// - the second one password
+		String[] lap = new String(authHeader).split("\\.", 3);
+
+		// If login or password fail
+		if (lap == null || lap.length != 3) {
+			return null;
+		} else {
+			userKey = lap[0];
+		}
+		return userKey;
+	}
 
 	@Override
 	public ContainerRequest filter(ContainerRequest request) {
-		log.info("start ContainerRequest");
+		log.info("start ContainerRequest "+request.getHeaderValue("Authorization"));
 
 		// Get the authentification passed in HTTP headers parameters
 		String authHeader = request.getHeaderValue("Authorization");
@@ -103,6 +124,12 @@ public class AuthenticationImpl implements Authentication {
 						case OAUTH1:
 							log.info("OAUTH1 auth");
 							authSchema = AuthType.OAUTH1.toString();
+							break;
+							
+						case BEARER:
+							log.info("BEARER (jwt) auth");
+							authSchema = AuthType.BEARER.toString();
+							userKey = this.getUserLoggedFromBearerAuth(request);
 							break;
 	
 						default:

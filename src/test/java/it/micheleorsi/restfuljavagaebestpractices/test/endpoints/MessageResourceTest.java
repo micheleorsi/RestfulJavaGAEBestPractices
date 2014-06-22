@@ -50,26 +50,35 @@ public class MessageResourceTest extends EndpointTest {
 	 * @throws NoSuchAlgorithmException 
 	 */
 	@Test
-	public void testCreateResource() throws NoSuchAlgorithmException {
+	public void testCreateResource() {
 		WebResource webResource = resource();
-		webResource.setProperty(HTTPSProperties.PROPERTY_HTTPS_PROPERTIES, new HTTPSProperties());
-		Message responseMsg = webResource
-	        .path("messages")
-	        .accept(MediaType.APPLICATION_JSON)
-	        .type(MediaType.APPLICATION_JSON)
-	        .header("Authorization", "Basic MjpwYXNzd29yZA==")
-	        .entity(new Message("subj", "body", Integer.valueOf(10)))
-	        .post(Message.class);
-		assertEquals(Integer.valueOf(10), responseMsg.getId());
-		
+		Message responseMsg = null;
+//		responseMsg = webResource
+//	        .path("messages")
+//	        .accept(MediaType.APPLICATION_JSON)
+//	        .type(MediaType.APPLICATION_JSON)
+//	        .header("Authorization", "Basic MjpwYXNzd29yZA==")
+//	        .entity(new Message("subj", "body", Integer.valueOf(10)))
+//	        .post(Message.class);
+//		assertEquals(Integer.valueOf(10), responseMsg.getId());
+//		
+//		responseMsg = webResource
+//		        .path("messages")
+//		        .accept(MediaType.APPLICATION_JSON)
+//		        .type(MediaType.APPLICATION_JSON)
+//		        .header("authorization", "Basic MjpwYXNzd29yZA==")
+//		        .entity(new Message("subj", "body", Integer.valueOf(10)))
+//		        .post(Message.class);
+//			assertEquals(Integer.valueOf(10), responseMsg.getId());
+			
 		responseMsg = webResource
-		        .path("messages")
-		        .accept(MediaType.APPLICATION_JSON)
-		        .type(MediaType.APPLICATION_JSON)
-		        .header("authorization", "Basic MjpwYXNzd29yZA==")
-		        .entity(new Message("subj", "body", Integer.valueOf(10)))
-		        .post(Message.class);
-			assertEquals(Integer.valueOf(10), responseMsg.getId());
+			        .path("messages")
+			        .accept(MediaType.APPLICATION_JSON)
+			        .type(MediaType.APPLICATION_JSON)
+			        .header("authorization", "Bearer 5.johndoe.foobar")
+			        .entity(new Message("subj", "body", Integer.valueOf(10)))
+			        .post(Message.class);
+				assertEquals(Integer.valueOf(10), responseMsg.getId());
 	}
 
 	/**

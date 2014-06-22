@@ -13,6 +13,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class JWT {
 
 	private String token = null;
+	
+	public JWT() {
+	}
 
 	public JWT(String token) {
 		this.token = token;

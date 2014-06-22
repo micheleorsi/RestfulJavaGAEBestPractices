@@ -29,20 +29,21 @@ public class User implements Principal {
 			public static final String CONTRIBUTOR = "CONTRIBUTOR";
 		}
 	};
-
-	private String userId; 
-	private String name; 
-	private String emailAddress; 
-	private String secret; 
+	
+	private String key;
+	private String userId;
+	private String name;
+	private String emailAddress;
+	private String secret;
 	private Set<Role> roles; 
 
-	public User(String emailAddress, String password, Set<Role> roles) {
-		this(emailAddress, password);
+	public User(String name, String password, Set<Role> roles) {
+		this(name, password);
 		this.roles = roles;
 	}
 
-	public User(String emailAddress, String secret) {
-		this.emailAddress = emailAddress;
+	public User(String name, String secret) {
+		this.name = name;
 		this.secret = secret;
 	}
 	
@@ -90,5 +91,13 @@ public class User implements Principal {
 
 	public void setSecret(String secret) {
 		this.secret = secret;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
 	}
 }

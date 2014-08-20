@@ -15,13 +15,11 @@ public class CloudSqlDAOFactory extends DAOFactory {
 
 	@Override
 	public CloudDatastoreUserDAO getUserDAO() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public MessageDAO getMessageDAO() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

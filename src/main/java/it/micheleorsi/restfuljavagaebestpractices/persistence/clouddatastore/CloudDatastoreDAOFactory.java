@@ -19,7 +19,6 @@ public class CloudDatastoreDAOFactory extends DAOFactory {
 
 	@Override
 	public MessageDAO getMessageDAO() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -25,10 +25,10 @@
 	<properties>
 		<appengine.app.name>micheletests</appengine.app.name>
 		<appengine.app.version>restfuljgaebp-${parsedVersion.majorVersion}-${parsedVersion.minorVersion}-${parsedVersion.incrementalVersion}-${parsedVersion.buildNumber}</appengine.app.version>
-		<appengine.target.version>1.9.6</appengine.target.version>
+		<appengine.target.version>1.9.9</appengine.target.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jersey.version>1.18.1</jersey.version>
-		<jackson.version>2.4.1</jackson.version>
+		<jackson.version>2.4.2</jackson.version>
 	</properties>
 
 	<dependencies>
@@ -107,7 +107,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>4.12-beta-1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -155,7 +155,7 @@
 		<dependency>
 		    <groupId>com.auth0</groupId>
 		    <artifactId>java-jwt</artifactId>
-		    <version>0.2</version>
+		    <version>0.3</version>
 		</dependency>
 
 

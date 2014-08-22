@@ -9,3 +9,7 @@ Usage
 To deploy into the cloud:
 
     mvn clean deploy
+    
+Build status
+------------
+[![Build Status](https://travis-ci.org/micheleorsi/RestfulJavaGAEBestPractices.svg?branch=master)](https://travis-ci.org/micheleorsi/RestfulJavaGAEBestPractices)
